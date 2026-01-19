@@ -1,0 +1,32 @@
+{
+  "name": "aws-mq-ews-lambda",
+  "version": "1.0.0",
+  "description": "Script to consume messages from MQTT broker and save to PostgreSQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:coverage": "jest --coverage",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mqtt",
+    "postgresql",
+    "mq"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "mqtt": "^5.14.1",
+    "pg": "^8.11.3",
+    "pg-format": "^1.0.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
