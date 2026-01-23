@@ -4,7 +4,7 @@ function extractUnitNumber(queueName) {
     const pattern = /ews\/pub\/(\d+)/;
     const match = queueName.match(pattern);
     if (match && match[1]) {
-      return parseInt(match[1], 10);
+      return match[1];
     }
     return null;
   } catch (error) {
@@ -59,7 +59,7 @@ function processMessage(messageBody, queueName) {
     const messageType = data.messageType;
     const messageTime = data.messageTime;
     const dataArray = data.data || [];
-    const messageId = `${Date.now()}`
+    const messageId = Date.now()
     
     if (!messageType || !messageTime || !Array.isArray(dataArray) || dataArray.length === 0) {
       console.warn(`Missing required fields in message:`, data);
@@ -78,7 +78,7 @@ function processMessage(messageBody, queueName) {
       const numericValue = convertFieldValue(fieldValue);
       
       records.push({
-        unit: unitNumber,
+        mobileId: unitNumber,
         time: messageTime,
         minid: messageType,
         fieldName: fieldName,

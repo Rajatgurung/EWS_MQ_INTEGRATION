@@ -3,6 +3,7 @@
 const mqtt = require('mqtt');
 const { processMessage } = require('./message-processor');
 const { saveToDatabase } = require('./pg-db-handler');
+const { processVolumeData } = require('./mongo-db-handler');
 
 async function consumeWithWildcard(client, maxMessages = 100) {
   
@@ -39,6 +40,9 @@ async function consumeWithWildcard(client, maxMessages = 100) {
         const processedRecords = processMessage(messageBody, queueName);
         records.push(...processedRecords);
         await saveToDatabase(records)
+        if(records[0]?.minid == 52){
+          await processVolumeData(records)
+        }
       } catch (error) {
         console.error(`Error processing message:`, error);
       }

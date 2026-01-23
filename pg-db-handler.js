@@ -46,15 +46,17 @@ async function saveToDatabase(records) {
     
     const values = records.map(r => [
       new Date(r.time),
-      r.unit,
+      r.mobileId,
       r.minid,
       r.fieldName,
       r.fieldValue,
-      r.messageId
+      r.messageId,
+      r.time,
+      "MQ"
     ]);
     
 
-    const insertQuery = format('INSERT INTO ews_test ("time","unit", "minid", "fieldName", "fieldValue", "messageId") VALUES %L', values);
+    const insertQuery = format('INSERT INTO ews_test ("time","mobileId", "minid", "fieldName", "fieldValue", "messageId", "receiveUTC", "source") VALUES %L', values);
     
     await client.query(insertQuery);
     await client.query('COMMIT');
@@ -69,16 +71,9 @@ async function saveToDatabase(records) {
   }
 }
 
-async function closeDbPool() {
-  if (pool) {
-    await pool.end();
-    pool = null;
-    console.log('Database connection pool closed');
-  }
-}
+
 
 module.exports = {
   getDbPool,
-  saveToDatabase,
-  closeDbPool
+  saveToDatabase
 };
