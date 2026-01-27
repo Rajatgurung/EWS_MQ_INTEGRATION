@@ -56,7 +56,7 @@ async function saveToDatabase(records) {
     ]);
     
 
-    const insertQuery = format('INSERT INTO ews_test ("time","mobileId", "minid", "fieldName", "fieldValue", "messageId", "receiveUTC", "source") VALUES %L', values);
+    const insertQuery = format('INSERT INTO iot ("time","mobileId", "minid", "fieldName", "fieldValue", "messageId", "receiveUTC", "source") VALUES %L', values);
     
     await client.query(insertQuery);
     await client.query('COMMIT');
