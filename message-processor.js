@@ -1,7 +1,7 @@
 
 function extractUnitNumber(queueName) {
   try {
-    const pattern = /ews\/pub\/(\d+)/;
+    const pattern = /ews\/pub\/(.+)/;
     const match = queueName.match(pattern);
     if (match && match[1]) {
       return match[1];
